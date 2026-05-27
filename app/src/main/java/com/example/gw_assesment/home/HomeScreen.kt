@@ -2,7 +2,7 @@ package com.example.gw_assesment.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,9 +18,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,7 +41,8 @@ import com.example.gw_assesment.utils.capitalizeFirstChar
 @Composable
 fun HomeScreen(
     state: HomeState,
-    onNavigate: (String) -> Unit
+    onNavigate: (String) -> Unit,
+    onItemClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -67,13 +66,23 @@ fun HomeScreen(
                     .padding(horizontal = 15.dp)
                     .padding(top = 20.dp)
             ) {
+
+                Text(
+                    text = "${stringResource(R.string.welcome)}, ${state.userName}!",
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
                 LazyColumn(
-                    state = rememberLazyListState(),
-                    /*verticalArrangement = Arrangement.spacedBy(10.dp)*/
+                    state = rememberLazyListState()
                 ) {
                     items(state.taskList) { item ->
-                        Column() {
-                            TaskItem(item)
+                        Column {
+                            TaskItem(
+                                item = item,
+                                onClick = { onItemClick() }
+                            )
                             Spacer(modifier = Modifier.height(10.dp))
                         }
                     }
@@ -104,10 +113,13 @@ fun HomeScreen(
 }
 
 @Composable
-fun TaskItem(item: TaskResponse) {
+fun TaskItem(item: TaskResponse, onClick: () -> Unit) {
     Card(
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(1.dp)
+        elevation = CardDefaults.cardElevation(1.dp),
+        modifier = Modifier.clickable {
+            onClick()
+        }
     ) {
         Column(
             modifier = Modifier
@@ -158,6 +170,7 @@ fun PreviewHomeScreen() {
         state = HomeState(
             taskList = TASK_LIST
         ),
-        onNavigate = {}
+        onNavigate = {},
+        onItemClick = {}
     )
 }

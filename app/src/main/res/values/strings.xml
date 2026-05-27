@@ -16,4 +16,5 @@
     <string name="enter_title">Enter title</string>
     <string name="enter_task_description">Enter task description</string>
     <string name="due">Due</string>
+    <string name="welcome">Welcome</string>
 </resources>

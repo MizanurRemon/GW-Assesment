@@ -5,4 +5,5 @@ object Route {
     const val LOGIN = "login"
     const val HOME = "home"
     const val CREATE = "create"
+    const val DETAILS = "details"
 }

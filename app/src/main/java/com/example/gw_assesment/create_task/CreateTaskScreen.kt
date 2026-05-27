@@ -39,7 +39,7 @@ fun CreateTaskScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
-        Column() {
+        Column(modifier = Modifier.fillMaxSize()) {
             CustomToolbar(
                 onClick = {
                     onBack()

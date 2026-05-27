@@ -129,7 +129,9 @@ fun LoginScreen(
 
 
             CommonActionButton(
-                onClick = {},
+                onClick = {
+                    onHome()
+                },
                 text = R.string.login,
                 modifier = Modifier
                     .fillMaxWidth()
