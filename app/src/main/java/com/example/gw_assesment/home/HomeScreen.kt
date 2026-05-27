@@ -139,6 +139,7 @@ fun TaskItem(item: TaskResponse) {
                         .padding(3.dp)
                 )
             }
+            Spacer(modifier = Modifier.height(10.dp))
 
             Text(
                 text = "${stringResource(R.string.due)}: ${item.dueDate}",
