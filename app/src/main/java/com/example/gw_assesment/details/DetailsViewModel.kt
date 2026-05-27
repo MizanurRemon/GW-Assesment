@@ -29,6 +29,12 @@ class DetailsViewModel @Inject constructor() : ViewModel(){
             is DetailsEvent.OnUpdateClick-> {
 
             }
+
+            is DetailsEvent.OnStatusSelection-> {
+                state = state.copy(
+                    selectedItem = event.value
+                )
+            }
         }
     }
 }

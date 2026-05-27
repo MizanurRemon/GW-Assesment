@@ -39,7 +39,7 @@ fun AppNavigation() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Route.SPLASH,
+            startDestination = Route.DETAILS,
             modifier = Modifier
                 .padding(innerPadding)
                 .windowInsetsPadding(WindowInsets.safeDrawing)
