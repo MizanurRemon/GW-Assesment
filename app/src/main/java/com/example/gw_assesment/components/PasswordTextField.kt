@@ -64,7 +64,7 @@ fun PasswordTextField(
     val isError = isTouched && !isValid
     val borderColor = when {
         isError -> scheme.error
-        isTouched -> scheme.onPrimary
+        isTouched -> Color.LightGray
         else -> scheme.outline.copy(alpha = 0.35f)
     }
 
@@ -80,7 +80,7 @@ fun PasswordTextField(
                 shape = shape,
                 color = borderColor
             )
-            .background(scheme.surfaceColorAtElevation(1.dp), shape = shape)
+            .background(MaterialTheme.colorScheme.background, shape = shape)
             .padding(horizontal = 10.dp)
             .onFocusEvent { event -> if (event.isFocused) onTouched() }
             .pointerInteropFilter {
