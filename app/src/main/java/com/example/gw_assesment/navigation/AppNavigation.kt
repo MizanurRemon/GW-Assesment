@@ -1,9 +1,11 @@
 package com.example.gw_assesment.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -14,6 +16,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.gw_assesment.login.LoginScreen
+import com.example.gw_assesment.login.LoginViewModel
 import com.example.gw_assesment.splash.SplashScreen
 import com.example.gw_assesment.splash.SplashViewModel
 import com.example.gw_assesment.utils.Route
@@ -33,6 +37,7 @@ fun AppNavigation() {
             modifier = Modifier
                 .padding(innerPadding)
                 .windowInsetsPadding(WindowInsets.safeDrawing)
+                .background(color = MaterialTheme.colorScheme.background)
         ) {
             composable(Route.SPLASH) {
                 val viewModel = hiltViewModel<SplashViewModel>()
@@ -44,19 +49,13 @@ fun AppNavigation() {
                 )
             }
 
-            /* composable(route = Route.LOGIN) {
+             composable(route = Route.LOGIN) {
                  val viewModel = hiltViewModel<LoginViewModel>()
                  LoginScreen(
                      snackBarHostState = snackBarHostState,
                      onEvent = viewModel::onEvent,
                      state = viewModel.state,
                      uiEvent = viewModel.uiEvent,
-                     onForgotPassword = {
-                         navController.navigate(Route.FORGOT_PASSWORD)
-                     },
-                     onSignUp = {
-                         navController.navigate(Route.SIGN_UP)
-                     },
                      onHome = {
                          navController.navigate(Route.HOME) {
                              popUpTo(navController.graph.id) {}
@@ -65,35 +64,7 @@ fun AppNavigation() {
                  )
              }
 
-             composable(route = Route.FORGOT_PASSWORD) {
-                 val viewModel = hiltViewModel<ForgotPasswordViewModel>()
-                 ForgotPasswordScreen(
-                     onEvent = viewModel::onEvent,
-                     state = viewModel.state,
-                     onBack = {
-                         navController.navigateUp()
-                     }
-                 )
-             }
-
-             composable(route = Route.SIGN_UP) {
-                 val viewModel = hiltViewModel<SignUpViewModel>()
-                 SignUpScreen(
-                     state = viewModel.state,
-                     onEvent = viewModel::onEvent,
-                     onSignIn = {
-                         navController.navigateUp()
-                     },
-                     snackBarHostState = snackBarHostState,
-                     uiEvent = viewModel.uiEvent,
-                     onHome = {
-                         navController.navigate(Route.HOME) {
-                             popUpTo(navController.graph.id) {}
-                         }
-                     }
-                 )
-             }
-
+            /*
              composable(route = Route.HOME) {
                  val viewModel = hiltViewModel<HomeViewModel>()
                  HomeScreen(

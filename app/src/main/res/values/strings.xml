@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">GW-Assesment</string>
+    <string name="odoo">odoo</string>
+    <string name="mobile">Mobile</string>
+    <string name="create_task">Create Task</string>
+    <string name="update_task">Update Task</string>
+    <string name="update_account">Update Account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="invalid_credentials">Invalid Credentials. Please try again.</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
 </resources>
