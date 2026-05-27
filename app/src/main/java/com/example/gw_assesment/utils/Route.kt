@@ -6,4 +6,5 @@ object Route {
     const val HOME = "home"
     const val CREATE = "create"
     const val DETAILS = "details"
+    const val UPDATE_ACCOUNT = "update_account"
 }

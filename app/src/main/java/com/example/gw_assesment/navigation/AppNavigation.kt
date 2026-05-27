@@ -16,6 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.gw_assesment.UpdateAccountScreen
 import com.example.gw_assesment.create_task.CreateTaskScreen
 import com.example.gw_assesment.create_task.CreateTaskViewModel
 import com.example.gw_assesment.details.DetailsScreen
@@ -106,6 +107,15 @@ fun AppNavigation() {
                     }
                 )
             }
+            composable(Route.UPDATE_ACCOUNT) {
+
+                UpdateAccountScreen(
+                    onBack = {
+                        navController.navigateUp()
+                    }
+                )
+            }
+
         }
     }
 

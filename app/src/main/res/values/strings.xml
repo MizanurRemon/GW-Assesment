@@ -18,4 +18,6 @@
     <string name="due">Due</string>
     <string name="welcome">Welcome</string>
     <string name="status">Status</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="enter_name">Enter name</string>
 </resources>
