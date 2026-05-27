@@ -16,6 +16,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.gw_assesment.create_task.CreateTaskScreen
+import com.example.gw_assesment.create_task.CreateTaskViewModel
 import com.example.gw_assesment.home.HomeScreen
 import com.example.gw_assesment.home.HomeViewModel
 import com.example.gw_assesment.login.LoginScreen
@@ -35,7 +37,7 @@ fun AppNavigation() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Route.SPLASH,
+            startDestination = Route.HOME,
             modifier = Modifier
                 .padding(innerPadding)
                 .windowInsetsPadding(WindowInsets.safeDrawing)
@@ -51,27 +53,42 @@ fun AppNavigation() {
                 )
             }
 
-             composable(route = Route.LOGIN) {
-                 val viewModel = hiltViewModel<LoginViewModel>()
-                 LoginScreen(
-                     snackBarHostState = snackBarHostState,
-                     onEvent = viewModel::onEvent,
-                     state = viewModel.state,
-                     uiEvent = viewModel.uiEvent,
-                     onHome = {
-                         navController.navigate(Route.HOME) {
-                             popUpTo(navController.graph.id) {}
-                         }
-                     }
-                 )
-             }
+            composable(route = Route.LOGIN) {
+                val viewModel = hiltViewModel<LoginViewModel>()
+                LoginScreen(
+                    snackBarHostState = snackBarHostState,
+                    onEvent = viewModel::onEvent,
+                    state = viewModel.state,
+                    uiEvent = viewModel.uiEvent,
+                    onHome = {
+                        navController.navigate(Route.HOME) {
+                            popUpTo(navController.graph.id) {}
+                        }
+                    }
+                )
+            }
 
-             composable(route = Route.HOME) {
-                 val viewModel = hiltViewModel<HomeViewModel>()
-                 HomeScreen(
-                     state = viewModel.state
-                 )
-             }
+            composable(route = Route.HOME) {
+                val viewModel = hiltViewModel<HomeViewModel>()
+                HomeScreen(
+                    state = viewModel.state,
+                    onNavigate = { route ->
+                        navController.navigate(route)
+                    }
+                )
+            }
+
+            composable(Route.CREATE) {
+                val viewModel = hiltViewModel<CreateTaskViewModel>()
+                CreateTaskScreen (
+                    state = viewModel.state,
+                    onEvent = viewModel::onEvent,
+                    uiEvent = viewModel.uiEvent,
+                    onBack = {
+                        navController.navigateUp()
+                    }
+                )
+            }
         }
     }
 
