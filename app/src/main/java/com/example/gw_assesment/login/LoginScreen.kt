@@ -56,7 +56,7 @@ fun LoginScreen(
             Text(
                 text = buildAnnotatedString {
                     withStyle(
-                        style = MaterialTheme.typography.headlineLarge.toSpanStyle()
+                        style = MaterialTheme.typography.displayLarge.toSpanStyle()
                             .copy(
                                 color = Color.White, fontFamily = FontFamily(
                                     Font(R.font.comfortaa_bold, FontWeight.Bold)
@@ -69,7 +69,7 @@ fun LoginScreen(
                     append(" ")
 
                     withStyle(
-                        style = MaterialTheme.typography.titleMedium.toSpanStyle()
+                        style = MaterialTheme.typography.headlineSmall.toSpanStyle()
                             .copy(color = Color.White)
                     )
                     {
