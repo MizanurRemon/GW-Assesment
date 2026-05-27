@@ -6,6 +6,7 @@ import android.view.MotionEvent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,11 +32,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.pointerInteropFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.gw_assesment.R
 
 @Composable
 fun CommonTextField(
@@ -51,7 +54,8 @@ fun CommonTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     textStyle: TextStyle = MaterialTheme.typography.bodyMedium,
     cursorColor: Color? = Color.Black,
-    shape: RoundedCornerShape = RoundedCornerShape(16.dp)
+    shape: RoundedCornerShape = RoundedCornerShape(16.dp),
+    trailingIcon: Painter? = null
 ) {
     val scheme = MaterialTheme.colorScheme
 
@@ -117,6 +121,16 @@ fun CommonTextField(
                 innerTextField()
             }
         )
+
+        trailingIcon?.let {
+            Image(
+                painter = trailingIcon,
+                contentDescription = null,
+                //tint = scheme.onSurfaceVariant,
+                modifier = Modifier
+                    .size(16.dp)
+            )
+        }
     }
 }
 

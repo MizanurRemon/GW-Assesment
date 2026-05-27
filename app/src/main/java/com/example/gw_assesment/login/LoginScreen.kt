@@ -30,6 +30,7 @@ import com.example.gw_assesment.R
 import com.example.gw_assesment.components.CommonActionButton
 import com.example.gw_assesment.components.CommonTextField
 import com.example.gw_assesment.components.PasswordTextField
+import com.example.gw_assesment.components.TextFieldTitleCompose
 import com.example.gw_assesment.utils.UiEvent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -88,8 +89,8 @@ fun LoginScreen(
                 .padding(30.dp)
 
         ) {
-            Text(text = stringResource(R.string.email), style = MaterialTheme.typography.bodyMedium)
 
+            TextFieldTitleCompose(text = R.string.email)
             Spacer(modifier = Modifier.height(8.dp))
 
             CommonTextField(
@@ -108,10 +109,7 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            Text(
-                text = stringResource(R.string.password),
-                style = MaterialTheme.typography.bodyMedium
-            )
+            TextFieldTitleCompose(text = R.string.password)
 
             Spacer(modifier = Modifier.height(8.dp))
 
