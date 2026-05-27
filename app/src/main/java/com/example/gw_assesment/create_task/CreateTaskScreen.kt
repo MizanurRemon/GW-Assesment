@@ -19,13 +19,12 @@ import androidx.compose.ui.unit.dp
 import com.example.gw_assesment.R
 import com.example.gw_assesment.components.CommonActionButton
 import com.example.gw_assesment.components.CommonTextField
+import com.example.gw_assesment.components.CustomDatePicker
 import com.example.gw_assesment.components.CustomToolbar
 import com.example.gw_assesment.components.TextFieldTitleCompose
-import com.example.gw_assesment.login.LoginEvent
 import com.example.gw_assesment.utils.UiEvent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import java.nio.file.WatchEvent
 
 @Composable
 fun CreateTaskScreen(
@@ -106,7 +105,7 @@ fun CreateTaskScreen(
                     isTouched = true,
                     isValid = true,
                     onTouched = {
-
+                        onEvent(CreateTaskEvent.OnDateSelectionDialog(true))
                     },
                     shape = RoundedCornerShape(8.dp),
                     trailingIcon = painterResource(R.drawable.ic_calender)
@@ -125,6 +124,18 @@ fun CreateTaskScreen(
 
         }
     }
+
+    CustomDatePicker(
+        selectedDate = state.dueDate,
+        showDatePicker = state.isDialogOpen,
+        onShowDatePickerChange = {
+            onEvent(CreateTaskEvent.OnDateSelectionDialog(it))
+        },
+        onDateSelected = {
+            //selectedDate = it
+            onEvent(CreateTaskEvent.OnDateSelection(it))
+        }
+    )
 }
 
 @Composable

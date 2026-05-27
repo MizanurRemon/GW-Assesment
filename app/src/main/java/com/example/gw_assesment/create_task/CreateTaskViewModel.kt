@@ -45,9 +45,15 @@ class CreateTaskViewModel @Inject constructor() : ViewModel() {
 
             is CreateTaskEvent.OnDateSelection-> {
                 state = state.copy(
-                    dueDate = event.value
+                    dueDate = event.value,
+                    isDialogOpen = false
                 )
             }
+
+            is CreateTaskEvent.OnDateSelectionDialog-> {
+                state = state.copy(isDialogOpen = event.value)
+            }
+
         }
     }
 }

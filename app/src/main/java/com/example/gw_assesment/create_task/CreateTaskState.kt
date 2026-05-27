@@ -7,5 +7,6 @@ data class CreateTaskState(
     val loading: Boolean = false,
     val title: String = "",
     val description: String = "",
-    val dueDate: String = getCurrentDate()
+    val dueDate: String = getCurrentDate(),
+    val isDialogOpen: Boolean = false
 )

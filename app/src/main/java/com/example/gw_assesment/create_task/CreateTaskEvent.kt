@@ -4,5 +4,6 @@ sealed class CreateTaskEvent {
     data class OnTitleEnter(val value: String): CreateTaskEvent()
     data class OnDescriptionEnter(val value: String): CreateTaskEvent()
     data class OnDateSelection(val value: String): CreateTaskEvent()
+    data class OnDateSelectionDialog(val value: Boolean): CreateTaskEvent()
     data object OnSubmit: CreateTaskEvent()
 }
