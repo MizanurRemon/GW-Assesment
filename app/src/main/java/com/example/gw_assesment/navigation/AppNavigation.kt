@@ -16,6 +16,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.gw_assesment.home.HomeScreen
+import com.example.gw_assesment.home.HomeViewModel
 import com.example.gw_assesment.login.LoginScreen
 import com.example.gw_assesment.login.LoginViewModel
 import com.example.gw_assesment.splash.SplashScreen
@@ -64,14 +66,12 @@ fun AppNavigation() {
                  )
              }
 
-            /*
              composable(route = Route.HOME) {
                  val viewModel = hiltViewModel<HomeViewModel>()
                  HomeScreen(
-                     state = viewModel.state,
-                     themeMode = themeMode
+                     state = viewModel.state
                  )
-             }*/
+             }
         }
     }
 
