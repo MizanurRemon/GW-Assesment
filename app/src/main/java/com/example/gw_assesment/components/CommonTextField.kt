@@ -64,7 +64,7 @@ fun CommonTextField(
     val isError = isTouched && !isValid
     val borderColor = when {
         isError -> scheme.error
-        isTouched -> scheme.onPrimary
+        isTouched -> Color.LightGray
         else -> scheme.outline.copy(alpha = 0.35f)
     }
 
@@ -74,8 +74,8 @@ fun CommonTextField(
         modifier = modifier
             .fillMaxWidth()
             .clip(shape)
-            .border(width = 2.dp, shape = shape, color = borderColor)
-            .background(color = scheme.surfaceColorAtElevation(1.dp), shape)
+            .border(width = 1.dp, shape = shape, color = borderColor)
+            .background(color = MaterialTheme.colorScheme.background, shape)
             .padding(horizontal = 10.dp)
             .onFocusEvent { event -> if (event.isFocused) onTouched() }
             .pointerInteropFilter {
