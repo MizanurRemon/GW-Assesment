@@ -35,8 +35,7 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun GWAssesmentTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
+    darkTheme: Boolean = false,//isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
