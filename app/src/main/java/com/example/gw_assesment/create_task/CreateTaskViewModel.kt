@@ -30,6 +30,24 @@ class CreateTaskViewModel @Inject constructor() : ViewModel() {
             is CreateTaskEvent.OnSubmit -> {
 
             }
+
+            is CreateTaskEvent.OnTitleEnter-> {
+                state = state.copy(
+                    title = event.value
+                )
+            }
+
+            is CreateTaskEvent.OnDescriptionEnter-> {
+                state = state.copy(
+                    description = event.value
+                )
+            }
+
+            is CreateTaskEvent.OnDateSelection-> {
+                state = state.copy(
+                    dueDate = event.value
+                )
+            }
         }
     }
 }

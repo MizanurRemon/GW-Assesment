@@ -57,9 +57,9 @@ fun CreateTaskScreen(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 CommonTextField(
-                    value = "",
+                    value = state.title,
                     onValueChange = {
-
+                        onEvent(CreateTaskEvent.OnTitleEnter(it))
                     },
                     placeholder = stringResource(R.string.enter_title),
                     isTouched = true,
@@ -77,9 +77,9 @@ fun CreateTaskScreen(
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 CommonTextField(
-                    value = "",
+                    value = state.description,
                     onValueChange = {
-
+                        onEvent(CreateTaskEvent.OnDescriptionEnter(it))
                     },
                     placeholder = stringResource(R.string.enter_task_description),
                     isTouched = true,
@@ -98,7 +98,7 @@ fun CreateTaskScreen(
                 Spacer(modifier = Modifier.height(8.dp))
                 CommonTextField(
                     readOnly = true,
-                    value = "",
+                    value = state.dueDate,
                     onValueChange = {
 
                     },
