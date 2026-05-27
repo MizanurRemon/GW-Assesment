@@ -69,14 +69,18 @@ fun HomeScreen(
             ) {
                 LazyColumn(
                     state = rememberLazyListState(),
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
+                    /*verticalArrangement = Arrangement.spacedBy(10.dp)*/
                 ) {
                     items(state.taskList) { item ->
-                        TaskItem(item)
+                        Column() {
+                            TaskItem(item)
+                            Spacer(modifier = Modifier.height(10.dp))
+                        }
                     }
+
                 }
 
-                Spacer(modifier = Modifier.height(10.dp))
+
             }
         }
 
