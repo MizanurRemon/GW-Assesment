@@ -123,19 +123,20 @@ fun CreateTaskScreen(
             }
 
         }
-    }
 
-    CustomDatePicker(
-        selectedDate = state.dueDate,
-        showDatePicker = state.isDialogOpen,
-        onShowDatePickerChange = {
-            onEvent(CreateTaskEvent.OnDateSelectionDialog(it))
-        },
-        onDateSelected = {
-            //selectedDate = it
-            onEvent(CreateTaskEvent.OnDateSelection(it))
-        }
-    )
+
+        CustomDatePicker(
+            selectedDate = state.dueDate,
+            showDatePicker = state.isDialogOpen,
+            onShowDatePickerChange = {
+                onEvent(CreateTaskEvent.OnDateSelectionDialog(it))
+            },
+            onDateSelected = {
+                //selectedDate = it
+                onEvent(CreateTaskEvent.OnDateSelection(it))
+            }
+        )
+    }
 }
 
 @Composable

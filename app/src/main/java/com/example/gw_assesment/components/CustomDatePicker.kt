@@ -44,31 +44,6 @@ fun CustomDatePicker(
 
     val datePickerState = rememberDatePickerState()
 
-    OutlinedTextField(
-        value = selectedDate,
-        onValueChange = {},
-        modifier = modifier
-            .fillMaxWidth()
-            .clickable(
-                indication = ripple(),
-                interactionSource = remember { MutableInteractionSource() }
-            ) {
-                onShowDatePickerChange(true)
-            },
-        label = {
-            Text(label)
-        },
-        trailingIcon = {
-            Image(
-                painter = painterResource(R.drawable.ic_calender),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-        },
-        readOnly = true,
-        enabled = false
-    )
-
     if (showDatePicker) {
 
         DatePickerDialog(
