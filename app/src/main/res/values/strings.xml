@@ -15,4 +15,5 @@
     <string name="due_date">Due Date</string>
     <string name="enter_title">Enter title</string>
     <string name="enter_task_description">Enter task description</string>
+    <string name="due">Due</string>
 </resources>

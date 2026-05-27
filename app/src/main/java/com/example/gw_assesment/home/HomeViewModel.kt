@@ -4,15 +4,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.gw_assesment.utils.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel(){
+class HomeViewModel @Inject constructor() : ViewModel() {
     var state by mutableStateOf(HomeState())
         private set
 
@@ -20,6 +23,10 @@ class HomeViewModel @Inject constructor() : ViewModel(){
     val uiEvent = _uiEvent.asSharedFlow()
 
     init {
-
+        viewModelScope.launch {
+            state = state.copy(
+                taskList = TASK_LIST
+            )
+        }
     }
 }
