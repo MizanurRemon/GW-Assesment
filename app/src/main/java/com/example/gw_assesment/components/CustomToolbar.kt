@@ -54,7 +54,7 @@ fun CustomToolbar(
 
             Text(
                 text = text,
-                style = MaterialTheme.typography.bodyMedium.copy(color = Color.White)
+                style = MaterialTheme.typography.titleMedium.copy(color = Color.White)
             )
 
 
