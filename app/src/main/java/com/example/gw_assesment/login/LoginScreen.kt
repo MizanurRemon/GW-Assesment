@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.example.gw_assesment.R
 import com.example.gw_assesment.components.CommonActionButton
 import com.example.gw_assesment.components.CommonTextField
+import com.example.gw_assesment.components.LoadingDialog
 import com.example.gw_assesment.components.PasswordTextField
 import com.example.gw_assesment.components.TextFieldTitleCompose
 import com.example.gw_assesment.utils.UiEvent
@@ -159,6 +160,10 @@ fun LoginScreen(
             )
 
         }
+    }
+
+    if(state.isLoading){
+        LoadingDialog {  }
     }
 }
 
