@@ -28,7 +28,9 @@ class CreateTaskViewModel @Inject constructor() : ViewModel() {
     fun onEvent(event: CreateTaskEvent) {
         when (event) {
             is CreateTaskEvent.OnSubmit -> {
+                if(!state.title.isEmpty()){
 
+                }
             }
 
             is CreateTaskEvent.OnTitleEnter-> {
