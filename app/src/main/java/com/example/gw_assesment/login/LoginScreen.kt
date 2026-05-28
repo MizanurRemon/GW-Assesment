@@ -14,6 +14,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,9 +41,28 @@ fun LoginScreen(
     snackBarHostState: SnackbarHostState,
     uiEvent: Flow<UiEvent>,
     onEvent: (LoginEvent) -> Unit,
-    onHome: () -> Unit,
+    onNavigation: (String) -> Unit,
     state: LoginState
 ) {
+
+    LaunchedEffect(key1 = Unit) {
+        uiEvent.collect {event->
+            when (event) {
+                is UiEvent.Success -> {
+
+                }
+
+                is UiEvent.Navigation -> {
+                    onNavigation(event.route)
+                }
+
+                is UiEvent.NavigateUp -> {
+
+                }
+            }
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -130,7 +150,7 @@ fun LoginScreen(
 
             CommonActionButton(
                 onClick = {
-                    onHome()
+                    onEvent(LoginEvent.OnSubmitEvent)
                 },
                 text = R.string.login,
                 modifier = Modifier
@@ -149,7 +169,7 @@ fun PreviewLoginScreen() {
         snackBarHostState = remember { SnackbarHostState() },
         uiEvent = flow {},
         onEvent = {},
-        onHome = {},
+        onNavigation = {},
         state = LoginState()
     )
 }

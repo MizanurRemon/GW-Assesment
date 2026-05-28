@@ -59,6 +59,24 @@ class PreferenceManager @Inject constructor(
             preferences[PreferenceConstants.USER_TOKEN]
         }
 
+    suspend fun saveUserId(userId: Int) {
+        dataStore.edit { preferences ->
+            preferences[PreferenceConstants.USER_ID] = userId
+        }
+    }
+
+    val userId: Flow<Int?> = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }
+        .map { preferences ->
+            preferences[PreferenceConstants.USER_ID]
+        }
+
     suspend fun clearAll() {
         dataStore.edit { preferences ->
             preferences.clear()

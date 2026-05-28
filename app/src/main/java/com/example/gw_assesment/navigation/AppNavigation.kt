@@ -63,9 +63,9 @@ fun AppNavigation() {
                     onEvent = viewModel::onEvent,
                     state = viewModel.state,
                     uiEvent = viewModel.uiEvent,
-                    onHome = {
-                        navController.navigate(Route.HOME) {
-                            //popUpTo(navController.graph.id) {}
+                    onNavigation = {route->
+                        navController.navigate(route) {
+                            popUpTo(navController.graph.id) {}
                         }
                     }
                 )
