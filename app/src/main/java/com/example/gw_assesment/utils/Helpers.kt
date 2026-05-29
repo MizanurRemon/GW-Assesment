@@ -7,7 +7,7 @@ import java.util.Locale
 
 fun getCurrentDate(): String {
     return SimpleDateFormat(
-        "MMM dd, yyyy",
+        "yyyy-MM-dd",
         Locale.ENGLISH
     ).format(Date())
 }

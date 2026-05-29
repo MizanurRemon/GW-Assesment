@@ -33,12 +33,21 @@ class AuthRepository @Inject constructor(
                     return Result.failure(Exception(body.error.message))
                 }
                 
-                val result = body?.id
+                val result = body?.result
                 when (result) {
                     is Int -> {
                         preferenceManager.saveUserId(result)
                         preferenceManager.saveLoginStatus(true)
                         Result.success(result)
+                    }
+
+                    is Double -> {
+                        val uid = result.toInt()
+
+                        preferenceManager.saveUserId(uid)
+                        preferenceManager.saveLoginStatus(true)
+
+                        Result.success(uid)
                     }
                     else -> Result.failure(Exception("Login failed: Invalid response format"))
                 }

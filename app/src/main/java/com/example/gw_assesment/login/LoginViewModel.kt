@@ -1,5 +1,6 @@
 package com.example.gw_assesment.login
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -57,11 +58,12 @@ class LoginViewModel @Inject constructor(
                 user = state.email,
                 pass = state.password
             )
-
-            result.onSuccess { _ ->
+            result.onSuccess { response ->
                 state = state.copy(isLoading = false)
+                Log.d("dataxx", "login: ${response}")
                 _uiEvent.emit(UiEvent.Navigation(Route.HOME))
             }.onFailure { e ->
+                Log.d("dataxx", "login: ${e}")
                 state = state.copy(isLoading = false)
             }
         }

@@ -1,6 +1,7 @@
 package com.example.gw_assesment.network.models
 
 import com.google.gson.annotations.SerializedName
+import kotlin.random.Random
 
 data class OdooRequest<out T>(
     @SerializedName("jsonrpc")
@@ -10,7 +11,7 @@ data class OdooRequest<out T>(
     @SerializedName("params")
     val params: T,
     @SerializedName("id")
-    val id: Int? = 953
+    val id: Int? = Random.nextInt(100, 10000)
 )
 
 data class OdooParams(

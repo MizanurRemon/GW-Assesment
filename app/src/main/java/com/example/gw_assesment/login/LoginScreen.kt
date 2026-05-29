@@ -60,6 +60,10 @@ fun LoginScreen(
                 is UiEvent.NavigateUp -> {
 
                 }
+
+                is UiEvent.ShowSnackBar-> {
+
+                }
             }
         }
     }

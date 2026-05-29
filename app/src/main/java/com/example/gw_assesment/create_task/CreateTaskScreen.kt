@@ -10,8 +10,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,11 +34,40 @@ import kotlinx.coroutines.flow.flow
 
 @Composable
 fun CreateTaskScreen(
+    snackBarHostState: SnackbarHostState,
     onBack: () -> Unit,
     uiEvent: Flow<UiEvent>,
     state: CreateTaskState,
     onEvent: (CreateTaskEvent) -> Unit
 ) {
+
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = Unit) {
+        uiEvent.collect {event->
+            when (event) {
+                is UiEvent.Success -> {
+
+                }
+
+                is UiEvent.Navigation -> {
+
+                }
+
+                is UiEvent.NavigateUp -> {
+
+                }
+
+                is UiEvent.ShowSnackBar-> {
+                    snackBarHostState.showSnackbar(
+                        message = event.message.asString(context = context),
+                        duration = SnackbarDuration.Short,
+                    )
+                }
+            }
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -117,7 +151,7 @@ fun CreateTaskScreen(
                 CommonActionButton(
                     modifier = Modifier.fillMaxWidth(),
                     onClick = {
-
+                        onEvent(CreateTaskEvent.OnSubmit)
                     },
                     text = R.string.create_task
                 )
@@ -148,6 +182,7 @@ fun CreateTaskScreen(
 @Preview
 fun PreviewCreateTaskScreen() {
     CreateTaskScreen(
+        snackBarHostState = remember { SnackbarHostState() },
         onBack = {},
         state = CreateTaskState(),
         onEvent = {},

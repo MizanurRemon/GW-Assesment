@@ -51,7 +51,9 @@ fun AppNavigation() {
                 SplashScreen(
                     uiEvent = viewModel.uiEvent,
                     onNavigation = { route ->
-                        navController.navigate(route)
+                        navController.navigate(route){
+                            popUpTo(navController.graph.id) {}
+                        }
                     }
                 )
             }
@@ -92,7 +94,8 @@ fun AppNavigation() {
                     uiEvent = viewModel.uiEvent,
                     onBack = {
                         navController.navigateUp()
-                    }
+                    },
+                    snackBarHostState = snackBarHostState
                 )
             }
 

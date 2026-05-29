@@ -41,6 +41,10 @@ fun SplashScreen(
                 is UiEvent.NavigateUp -> {
 
                 }
+
+                is UiEvent.ShowSnackBar-> {
+
+                }
             }
 
         }
