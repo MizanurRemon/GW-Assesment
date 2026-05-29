@@ -36,14 +36,18 @@ class AuthRepository @Inject constructor(
                 val result = body?.result
                 when (result) {
                     is Int -> {
+
+                        preferenceManager.saveToken(pass)
                         preferenceManager.saveUserId(result)
                         preferenceManager.saveLoginStatus(true)
                         Result.success(result)
+
                     }
 
                     is Double -> {
                         val uid = result.toInt()
 
+                        preferenceManager.saveToken(pass)
                         preferenceManager.saveUserId(uid)
                         preferenceManager.saveLoginStatus(true)
 

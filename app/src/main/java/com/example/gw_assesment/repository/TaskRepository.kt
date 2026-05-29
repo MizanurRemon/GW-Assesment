@@ -18,15 +18,13 @@ class TaskRepository @Inject constructor(
     suspend fun createTask(
         name: String,
         description: String,
-        dueDate: String,
-        projectId: Int = 1
+        dueDate: String
     ): Result<Int> {
         val uid = preferenceManager.userId.first() ?: return Result.failure(Exception("User not logged in"))
+        val passWord = preferenceManager.userToken.first()
 
         val values = mapOf(
             "name" to name,
-            //"project_id" to projectId,
-           // "user_ids" to listOf(listOf(1)),
             "date_deadline" to dueDate,
             "description" to description
         )
@@ -37,7 +35,7 @@ class TaskRepository @Inject constructor(
             "args" to listOf(
                 db,
                 uid,
-                "rr6251413",
+                passWord,
                 "project.task",
                 "create",
                 listOf(values),
