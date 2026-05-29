@@ -3,6 +3,7 @@ package com.example.gw_assesment.repository
 import android.util.Log
 import com.example.gw_assesment.datastore.PreferenceManager
 import com.example.gw_assesment.di.OdooDatabase
+import com.example.gw_assesment.model.TaskResponse
 import com.example.gw_assesment.network.OdooApiService
 import com.example.gw_assesment.network.models.OdooRequest
 import kotlinx.coroutines.flow.first
@@ -55,19 +56,70 @@ class TaskRepository @Inject constructor(
                     Log.d("dataxx", "body error: ${body.error}")
                     Result.failure(Exception(body.error.message))
                 } else {
-                    val result = body?.result
-                    when (result) {
+                    when (val result = body?.result) {
                         is Double -> Result.success(result.toInt())
                         is Int -> Result.success(result)
                         else -> Result.failure(Exception("Failed to create task: Invalid response"))
                     }
                 }
             } else {
-                Log.d("dataxx", "createTask: ${response}")
+                Log.d("dataxx", "createTask: $response")
                 Result.failure(Exception("Error: ${response.code()} ${response.message()}"))
             }
         } catch (e: Exception) {
-            Log.d("dataxx", "createTask exception: ${e}")
+            Log.d("dataxx", "createTask exception: $e")
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getTasks(): Result<List<TaskResponse>> {
+        val uid = preferenceManager.userId.first() ?: return Result.failure(Exception("User not logged in"))
+        val passWord = preferenceManager.userToken.first()
+
+        val params = mapOf(
+            "service" to "object",
+            "method" to "execute_kw",
+            "args" to listOf(
+                db,
+                uid,
+                passWord,
+                "project.task",
+                "search_read",
+                listOf<Any>(),
+                mapOf(
+                    "fields" to listOf("id", "name", "description", "date_deadline")
+                )
+            )
+        )
+
+        val request = OdooRequest(params = params)
+
+        return try {
+            val response = apiService.call(request)
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body?.error != null) {
+                    Result.failure(Exception(body.error.message))
+                } else {
+                    val result = body?.result as? List<*>
+                    val tasks: List<TaskResponse> = result?.mapNotNull {
+                        val map = it as? Map<*, *>
+                        if (map != null) {
+                            TaskResponse(
+                                id = (map["id"] as? Double)?.toInt() ?: 0,
+                                title = map["name"] as? String ?: "",
+                                description = map["description"] as? String ?: "",
+                                dueDate = map["date_deadline"] as? String ?: "",
+                                status = "Pending"
+                            )
+                        } else null
+                    } ?: emptyList()
+                    Result.success(tasks)
+                }
+            } else {
+                Result.failure(Exception("Error: ${response.code()}"))
+            }
+        } catch (e: Exception) {
             Result.failure(e)
         }
     }
