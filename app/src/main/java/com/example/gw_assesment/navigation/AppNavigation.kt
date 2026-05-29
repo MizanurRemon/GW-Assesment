@@ -1,5 +1,6 @@
 package com.example.gw_assesment.navigation
 
+import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
@@ -29,6 +30,7 @@ import com.example.gw_assesment.login.LoginViewModel
 import com.example.gw_assesment.splash.SplashScreen
 import com.example.gw_assesment.splash.SplashViewModel
 import com.example.gw_assesment.utils.Route
+import com.google.gson.Gson
 
 @Composable
 fun AppNavigation() {
@@ -83,7 +85,8 @@ fun AppNavigation() {
                     },
                     onItemClick = {response->
                         Log.d("dataxx", "AppNavigation: ${response}")
-                        navController.navigate(Route.DETAILS)
+                        val json = Uri.encode(Gson().toJson(response))
+                        navController.navigate("${Route.DETAILS}/$json")
                     },
                     onEvent = viewModel::onEvent
                 )
@@ -102,7 +105,7 @@ fun AppNavigation() {
                 )
             }
 
-            composable(Route.DETAILS) {
+            composable("${Route.DETAILS}/{task}") {
                 val viewModel = hiltViewModel<DetailsViewModel>()
                 DetailsScreen(
                     state = viewModel.state,
@@ -110,7 +113,8 @@ fun AppNavigation() {
                     uiEvent = viewModel.uiEvent,
                     onBack = {
                         navController.navigateUp()
-                    }
+                    },
+                    snackBarHostState = snackBarHostState,
                 )
             }
             composable(Route.UPDATE_ACCOUNT) {

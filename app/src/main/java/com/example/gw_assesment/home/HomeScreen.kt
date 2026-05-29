@@ -138,7 +138,7 @@ fun HomeScreen(
 @Composable
 private fun TaskItem(item: TaskResponse, onClick: () -> Unit) {
 
-    val stage = StatusType.fromType(item.stage)
+    val stage = StatusType.fromState(item.stage)
 
     Column(modifier = Modifier.fillMaxWidth()) {
 
@@ -168,7 +168,7 @@ private fun TaskItem(item: TaskResponse, onClick: () -> Unit) {
                     Text(
                         text = stage.status,
                         style = MaterialTheme.typography.bodyMedium.copy(
-                            color = StatusType.fromType(item.stage).statusColor,
+                            color = StatusType.fromState(item.stage).statusColor,
                             fontWeight = FontWeight.SemiBold
                         ),
                         modifier = Modifier

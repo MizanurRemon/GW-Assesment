@@ -34,9 +34,15 @@ enum class StatusType(
 
 
     companion object {
-        fun fromType(value: String?): StatusType {
+        fun fromState(value: String?): StatusType {
             return entries.firstOrNull {
                 it.state.equals(value, ignoreCase = true)
+            } ?: IN_PROGRESS
+        }
+
+        fun fromStatus(value: String?): StatusType {
+            return entries.firstOrNull {
+                it.status.equals(value, ignoreCase = true)
             } ?: IN_PROGRESS
         }
     }
