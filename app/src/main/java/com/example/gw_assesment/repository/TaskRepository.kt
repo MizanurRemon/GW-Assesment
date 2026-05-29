@@ -28,8 +28,8 @@ class TaskRepository @Inject constructor(
             "name" to name,
             "date_deadline" to dueDate,
             "description" to description,
-            "status" to "Pending",
-            "stage_id" to 1
+            //"status" to "Pending",
+            "stage_id" to 4
         )
 
         val params = mapOf(
@@ -89,7 +89,7 @@ class TaskRepository @Inject constructor(
                 "search_read",
                 listOf<Any>(),
                 mapOf(
-                    "fields" to listOf("id", "name", "description", "date_deadline")
+                    "fields" to listOf("id", "name", "description","state", "date_deadline")
                 )
             )
         )
@@ -100,6 +100,7 @@ class TaskRepository @Inject constructor(
             val response = apiService.call(request)
             if (response.isSuccessful) {
                 val body = response.body()
+                Log.d("dataxx", "getTasks: ${body?.result}")
                 if (body?.error != null) {
                     Result.failure(Exception(body.error.message))
                 } else {
@@ -112,7 +113,7 @@ class TaskRepository @Inject constructor(
                                 title = map["name"] as? String ?: "",
                                 description = map["description"] as? String ?: "",
                                 dueDate = map["date_deadline"] as? String ?: "",
-                                status = "Pending"
+                                stage = map["state"] as? String ?: "",
                             )
                         } else null
                     } ?: emptyList()

@@ -1,6 +1,7 @@
 package com.example.gw_assesment.home
 
 import com.example.gw_assesment.model.TaskResponse
+import com.example.gw_assesment.utils.StatusType
 import com.example.gw_assesment.utils.getCurrentDate
 
 data class HomeState(
@@ -15,27 +16,27 @@ val TASK_LIST = listOf(
         title = "Call Client",
         description = "",
         dueDate = getCurrentDate(),
-        status = "Pending"
+        stage = StatusType.IN_PROGRESS.status
     ),
     TaskResponse(
         id = 1,
         title = "Prepare Report",
         description = "",
         dueDate = getCurrentDate(),
-        status = "Completed"
+        stage = StatusType.IN_PROGRESS.status
     ),
     TaskResponse(
         id = 2,
         title = "Update Website",
         description = "",
         dueDate = getCurrentDate(),
-        status = "In Progress"
+        stage = StatusType.IN_PROGRESS.status
     ),
     TaskResponse(
         id = 3,
         title = "Submit Invoice",
         description = "",
         dueDate = getCurrentDate(),
-        status = "Pending"
+        stage = StatusType.IN_PROGRESS.status
     ),
 )

@@ -137,6 +137,9 @@ fun HomeScreen(
 
 @Composable
 private fun TaskItem(item: TaskResponse, onClick: () -> Unit) {
+
+    val stage = StatusType.fromType(item.stage)
+
     Column(modifier = Modifier.fillMaxWidth()) {
 
         Card(
@@ -163,14 +166,14 @@ private fun TaskItem(item: TaskResponse, onClick: () -> Unit) {
                     Spacer(modifier = Modifier.weight(1f))
 
                     Text(
-                        text = item.status,
+                        text = stage.status,
                         style = MaterialTheme.typography.bodyMedium.copy(
-                            color = StatusType.fromType(item.status).statusColor,
+                            color = StatusType.fromType(item.stage).statusColor,
                             fontWeight = FontWeight.SemiBold
                         ),
                         modifier = Modifier
                             .background(
-                                color = StatusType.fromType(item.status).statusBackgroundColor,
+                                color = stage.statusBackgroundColor,
                                 shape = RoundedCornerShape(5.dp)
                             )
                             .padding(3.dp)
