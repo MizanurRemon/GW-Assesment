@@ -1,5 +1,6 @@
 package com.example.gw_assesment.navigation
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
@@ -80,7 +81,8 @@ fun AppNavigation() {
                     onNavigate = { route ->
                         navController.navigate(route)
                     },
-                    onItemClick = {
+                    onItemClick = {response->
+                        Log.d("dataxx", "AppNavigation: ${response}")
                         navController.navigate(Route.DETAILS)
                     },
                     onEvent = viewModel::onEvent

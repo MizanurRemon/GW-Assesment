@@ -100,7 +100,6 @@ class TaskRepository @Inject constructor(
             val response = apiService.call(request)
             if (response.isSuccessful) {
                 val body = response.body()
-                Log.d("dataxx", "getTasks: ${body?.result}")
                 if (body?.error != null) {
                     Result.failure(Exception(body.error.message))
                 } else {

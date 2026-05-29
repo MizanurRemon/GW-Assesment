@@ -47,7 +47,7 @@ import com.example.gw_assesment.utils.capitalizeFirstChar
 fun HomeScreen(
     state: HomeState,
     onNavigate: (String) -> Unit,
-    onItemClick: () -> Unit,
+    onItemClick: (TaskResponse) -> Unit,
     onEvent: (HomeEvent) -> Unit
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -101,7 +101,7 @@ fun HomeScreen(
                         items(state.taskList) { item ->
                             TaskItem(
                                 item = item,
-                                onClick = { onItemClick() }
+                                onClick = { onItemClick(item) }
                             )
                         }
                     } else {
@@ -260,7 +260,9 @@ fun PreviewHomeScreen() {
             taskList = TASK_LIST
         ),
         onNavigate = {},
-        onItemClick = {},
+        onItemClick = {
+
+        },
         onEvent = {}
     )
 }
