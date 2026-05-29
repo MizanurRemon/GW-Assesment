@@ -64,7 +64,7 @@ class LoginViewModel @Inject constructor(
                 _uiEvent.emit(UiEvent.Navigation(Route.HOME))
             }.onFailure { e ->
                 Log.d("dataxx", "login: ${e}")
-                state = state.copy(isLoading = false)
+                state = state.copy(isLoading = false, isError = e.message?: "Invalid Credentials. Please try again.")
             }
         }
     }

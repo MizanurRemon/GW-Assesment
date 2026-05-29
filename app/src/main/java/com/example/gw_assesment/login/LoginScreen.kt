@@ -47,7 +47,7 @@ fun LoginScreen(
 ) {
 
     LaunchedEffect(key1 = Unit) {
-        uiEvent.collect {event->
+        uiEvent.collect { event ->
             when (event) {
                 is UiEvent.Success -> {
 
@@ -61,7 +61,7 @@ fun LoginScreen(
 
                 }
 
-                is UiEvent.ShowSnackBar-> {
+                is UiEvent.ShowSnackBar -> {
 
                 }
             }
@@ -152,6 +152,12 @@ fun LoginScreen(
                 shape = RoundedCornerShape(8.dp)
             )
 
+            Spacer(modifier = Modifier.height(8.dp))
+
+            if (!state.isError.isEmpty()) Text(
+                text = state.isError,
+                style = MaterialTheme.typography.bodyMedium.copy(color = Color.Red)
+            )
 
             CommonActionButton(
                 onClick = {
@@ -166,8 +172,8 @@ fun LoginScreen(
         }
     }
 
-    if(state.isLoading){
-        LoadingDialog {  }
+    if (state.isLoading) {
+        LoadingDialog { }
     }
 }
 
