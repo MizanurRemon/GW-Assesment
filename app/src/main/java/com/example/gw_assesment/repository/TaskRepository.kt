@@ -27,7 +27,9 @@ class TaskRepository @Inject constructor(
         val values = mapOf(
             "name" to name,
             "date_deadline" to dueDate,
-            "description" to description
+            "description" to description,
+            "status" to "Pending",
+            "stage_id" to 1
         )
 
         val params = mapOf(

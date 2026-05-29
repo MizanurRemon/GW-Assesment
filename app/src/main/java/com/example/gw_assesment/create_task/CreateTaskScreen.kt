@@ -47,7 +47,7 @@ fun CreateTaskScreen(
         uiEvent.collect {event->
             when (event) {
                 is UiEvent.Success -> {
-
+                    onBack()
                 }
 
                 is UiEvent.Navigation -> {
