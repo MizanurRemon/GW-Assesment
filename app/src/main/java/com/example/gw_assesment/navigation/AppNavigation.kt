@@ -82,7 +82,8 @@ fun AppNavigation() {
                     },
                     onItemClick = {
                         navController.navigate(Route.DETAILS)
-                    }
+                    },
+                    onEvent = viewModel::onEvent
                 )
             }
 

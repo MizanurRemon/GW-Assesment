@@ -4,7 +4,7 @@ import com.example.gw_assesment.model.TaskResponse
 import com.example.gw_assesment.utils.getCurrentDate
 
 data class HomeState(
-    val loading: Boolean = false,
+    val isLoading: Boolean = false,
     val userName: String = "John Doe",
     val taskList: List<TaskResponse> = emptyList()
 )

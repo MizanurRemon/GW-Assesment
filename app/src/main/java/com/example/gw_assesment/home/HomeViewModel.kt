@@ -25,19 +25,27 @@ class HomeViewModel @Inject constructor(
     val uiEvent = _uiEvent.asSharedFlow()
 
     init {
-        getTasks()
+       // getTasks()
     }
 
     fun getTasks() {
         viewModelScope.launch {
-            state = state.copy(loading = true)
+            state = state.copy(isLoading = true)
             taskRepository.getTasks().onSuccess { tasks ->
                 state = state.copy(
                     taskList = tasks,
-                    loading = false
+                    isLoading = false
                 )
             }.onFailure {
-                state = state.copy(loading = false)
+                state = state.copy(isLoading = false)
+            }
+        }
+    }
+
+    fun onEvent(event: HomeEvent){
+        when(event){
+            is HomeEvent.OnRefresh-> {
+                getTasks()
             }
         }
     }
